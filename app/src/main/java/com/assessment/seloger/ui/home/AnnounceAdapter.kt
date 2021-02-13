@@ -4,10 +4,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.assessment.domain.model.Announce
 import com.assessment.seloger.R
 import com.assessment.seloger.utils.setImageUrl
+import kotlinx.android.synthetic.main.fragment_detail_announce.*
 
 
 class AnnounceAdapter() : RecyclerView.Adapter<AnnounceAdapter.AnnounceViewHolder>() {
@@ -33,10 +35,13 @@ class AnnounceAdapter() : RecyclerView.Adapter<AnnounceAdapter.AnnounceViewHolde
 
     inner class AnnounceViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val img: ImageView = itemView.findViewById(R.id.image)
+        val tvGeneralInfo: TextView = itemView.findViewById(R.id.tvGeneralInfo)
     }
 
     private fun bind(holder: AnnounceViewHolder, item: Announce) = with(holder) {
         img.setImageUrl(item.image)
+        tvGeneralInfo.text = "${item.city} . ${item.price} . ${item.area} m "
+
         itemView.setOnClickListener { itemClickListener?.invoke(item) }
     }
 }

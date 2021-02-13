@@ -53,6 +53,10 @@ class DetailsAnnounceDialogFragment : DialogFragment() {
     private fun initView() {
         view?.let {
 
+            tvCity.text = announce.city
+            tvPrice.text = announce.price.toString()
+            tvPropertyType.text = announce.propertyType
+            tvGeneralInfo.text = "${announce.nbrRooms}p . ${announce.nbrBedrooms}ch . ${announce.area} m "
 
             close.setOnClickListener {
                 dismiss()

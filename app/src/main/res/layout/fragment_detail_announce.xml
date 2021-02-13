@@ -11,11 +11,71 @@
         android:layout_height="0dp"
         android:background="@android:color/white"
         android:scaleType="centerCrop"
-        app:layout_constraintDimensionRatio="20"
+        app:layout_constraintHeight_percent="0.22"
         tools:src="@tools:sample/backgrounds/scenic"
         android:contentDescription="@string/app_name"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tvPropertyType"
+        style="@style/TxtTile.Medium"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageAnnounce"
+        android:layout_margin="@dimen/small_dimen"
+        tools:text="Appartement"
+        />
+
+    <TextView
+        android:id="@+id/tvGeneralInfo"
+        style="@style/TxtTile.Medium"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvPropertyType"
+        android:layout_margin="@dimen/small_dimen"
+        tools:text="Appartement"
+        />
+
+
+
+    <TextView
+        android:id="@+id/tvPrice"
+        style="@style/TxtTile.Big"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        android:drawableEnd="@drawable/ic_euro"
+        android:drawablePadding="@dimen/small_dimen"
+        app:layout_constraintTop_toBottomOf="@+id/tvGeneralInfo"
+        android:layout_margin="@dimen/small_dimen"
+        tools:text="Appartement"
+        />
+
+
+    <TextView
+        android:id="@+id/tvCity"
+        style="@style/TxtTile.Medium"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvPrice"
+        android:layout_margin="@dimen/small_dimen"
+        tools:text="Appartement"
+        />
+
+    <TextView
+        android:id="@+id/tvArea"
+        style="@style/TxtTile.Medium"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvCity"
+        android:layout_margin="@dimen/small_dimen"
+        tools:text="Appartement"
+        />
 
 
     <ImageView
