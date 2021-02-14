@@ -10,35 +10,32 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:background="@android:color/white"
+        android:contentDescription="@string/app_name"
         android:scaleType="centerCrop"
         app:layout_constraintHeight_percent="0.22"
-        tools:src="@tools:sample/backgrounds/scenic"
-        android:contentDescription="@string/app_name"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:src="@tools:sample/backgrounds/scenic" />
 
     <TextView
         android:id="@+id/tvPropertyType"
         style="@style/TxtTile.Medium"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_margin="@dimen/small_dimen"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageAnnounce"
-        android:layout_margin="@dimen/small_dimen"
-        tools:text="Appartement"
-        />
+        tools:text="Appartement" />
 
     <TextView
         android:id="@+id/tvGeneralInfo"
         style="@style/TxtTile.Medium"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_margin="@dimen/small_dimen"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvPropertyType"
-        android:layout_margin="@dimen/small_dimen"
-        tools:text="Appartement"
-        />
-
+        tools:text="Appartement" />
 
 
     <TextView
@@ -46,13 +43,12 @@
         style="@style/TxtTile.Big"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="parent"
+        android:layout_margin="@dimen/small_dimen"
         android:drawableEnd="@drawable/ic_euro"
         android:drawablePadding="@dimen/small_dimen"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvGeneralInfo"
-        android:layout_margin="@dimen/small_dimen"
-        tools:text="Appartement"
-        />
+        tools:text="Appartement" />
 
 
     <TextView
@@ -60,22 +56,20 @@
         style="@style/TxtTile.Medium"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_margin="@dimen/small_dimen"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvPrice"
-        android:layout_margin="@dimen/small_dimen"
-        tools:text="Appartement"
-        />
+        tools:text="Appartement" />
 
     <TextView
         android:id="@+id/tvArea"
         style="@style/TxtTile.Medium"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_margin="@dimen/small_dimen"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvCity"
-        android:layout_margin="@dimen/small_dimen"
-        tools:text="Appartement"
-        />
+        tools:text="Appartement" />
 
 
     <ImageView

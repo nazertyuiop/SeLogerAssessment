@@ -5,9 +5,7 @@ import retrofit2.http.GET
 
 interface AnnouncesApi {
 
-
     @GET("/listings.json")
-    suspend fun getListAnnounces(): AnnouncesResponseJson
-
+    suspend fun getListAnnounces(): AnnouncesResponse
 
 }

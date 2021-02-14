@@ -1,57 +1,77 @@
 package com.assessment.seloger.ui.home
 
 import android.os.Bundle
-import android.view.*
+import android.view.View
+import android.view.View.GONE
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
-import androidx.recyclerview.widget.LinearLayoutManager
+import com.assessment.domain.model.Announce
 import com.assessment.seloger.R
-import kotlinx.android.synthetic.main.fragment_home.*
+import com.assessment.seloger.databinding.FragmentHomeBinding
+import com.assessment.seloger.utils.livedata.isNetworkRelated
 import org.koin.android.viewmodel.ext.android.viewModel
 
 
-class HomeFragment : Fragment() {
+class HomeFragment : Fragment(R.layout.fragment_home) {
 
-    companion object {
-
-        private const val TAG_FULL_SCREEN_DIALOG = "TAG_FULL_SCREEN_DIALOG"
-    }
+    private var _binding: FragmentHomeBinding? = null
+    private val binding: FragmentHomeBinding get() = requireNotNull(_binding)
 
     private val viewModel by viewModel<HomeViewModel>()
     private val adapter by lazy { AnnounceAdapter() }
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.fragment_home, container, false)
-    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        _binding = FragmentHomeBinding.bind(view)
         super.onViewCreated(view, savedInstanceState)
-        loader.visibility = View.VISIBLE
-        viewModel.getListAnnounces()
         initRecycleView()
         observeViewModel()
+        viewModel.getListAnnounces()
     }
 
 
     private fun initRecycleView() {
-        announcesRecyclerView.layoutManager = LinearLayoutManager(context)
-        announcesRecyclerView.adapter = adapter
-        adapter.itemClickListener = { announce ->
-            DetailsAnnounceDialogFragment.newInstance(announce)
-                    .show(childFragmentManager, TAG_FULL_SCREEN_DIALOG)
-        }
+        binding.announcesRecyclerView.adapter = adapter
+        adapter.itemClickListener = ::showAnnounceDetails
     }
 
     private fun observeViewModel() {
-        viewModel.listAnnounce.observe(viewLifecycleOwner, Observer { listAnnounces ->
-            adapter.items.clear()
-            adapter.items.addAll(listAnnounces)
-            adapter.notifyDataSetChanged()
-            loader.visibility = View.GONE
+        viewModel.getAnnouncesEvent.observe(viewLifecycleOwner, Observer {
+            when (it) {
+                HomeViewModel.GetAnnounceEvent.Loading -> toggleLoading(true)
+                is HomeViewModel.GetAnnounceEvent.Error -> handleGetAnnouncesEventError(it.exception)
+                is HomeViewModel.GetAnnounceEvent.Success -> handleGetAnnouncesEventSuccess(it.announces)
+            }
         })
+    }
+
+    private fun handleGetAnnouncesEventSuccess(ads: List<Announce>) {
+        toggleLoading(false)
+        adapter.items = ads
+    }
+
+    private fun handleGetAnnouncesEventError(e: Exception) {
+        toggleLoading(false)
+        Toast.makeText(
+            requireContext(),
+            getString(if (e.isNetworkRelated()) R.string.error_no_connection else R.string.technical_error_message),
+            Toast.LENGTH_SHORT
+        ).show()
+    }
+
+    private fun toggleLoading(show: Boolean) {
+        binding.loader.visibility = if (show) View.VISIBLE else GONE
+    }
+
+    private fun showAnnounceDetails(announce: Announce) {
+        DetailsAnnounceDialogFragment.newInstance(announce)
+            .show(childFragmentManager, DetailsAnnounceDialogFragment.TAG)
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 
 }

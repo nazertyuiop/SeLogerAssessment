@@ -63,6 +63,8 @@ ext {
             lifecycle       : "2.2.0",
             glide : '4.9.0',
             mockito : '2.6.1',
+            mockk : '1.10.6',
+            mockitoKotlin : '2.2.0',
             gson : '2.8.5',
             koin : "1.0.2",
             okhttp : '3.13.1',
@@ -100,6 +102,8 @@ ext {
             glideKapt : "com.github.bumptech.glide:compiler:$libVersions.glide",
 
             mockito : "org.mockito:mockito-core:$libVersions.mockito",
+            mockk : "io.mockk:mockk:$libVersions.mockk",
+            mockitoKotlin : "com.nhaarman.mockitokotlin2:mockito-kotlin:$libVersions.mockitoKotlin",
             gson : "com.google.code.gson:gson:$libVersions.gson",
 
             coroutineCore     : "org.jetbrains.kotlinx:kotlinx-coroutines-core:$libVersions.coroutine",

@@ -1,20 +1,19 @@
 package com.assessment.seloger.ui.home
 
-import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.assessment.domain.model.Announce
+import com.assessment.domain.model.getGeneralInfo
 import com.assessment.seloger.R
+import com.assessment.seloger.databinding.AnnonceListItemBinding
+import com.assessment.seloger.utils.livedata.inflate
 import com.assessment.seloger.utils.setImageUrl
-import kotlinx.android.synthetic.main.fragment_detail_announce.*
 
 
-class AnnounceAdapter() : RecyclerView.Adapter<AnnounceAdapter.AnnounceViewHolder>() {
+class AnnounceAdapter : RecyclerView.Adapter<AnnounceAdapter.AnnounceViewHolder>() {
 
-    var items = mutableListOf<Announce>()
+    var items = listOf<Announce>()
         set(value) {
             field = value
             notifyDataSetChanged()
@@ -24,24 +23,21 @@ class AnnounceAdapter() : RecyclerView.Adapter<AnnounceAdapter.AnnounceViewHolde
     override fun getItemCount() = items.size
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AnnounceViewHolder =
-        AnnounceViewHolder(
-            (LayoutInflater.from(parent.context).inflate(R.layout.annonce_list_item, parent, false))
-        )
+        AnnounceViewHolder(parent.inflate(R.layout.annonce_list_item))
 
     override fun onBindViewHolder(holder: AnnounceViewHolder, position: Int) {
-        val gifObj: Announce = items[position]
-        bind(holder, gifObj)
+        val announce: Announce = items[position]
+        holder.bind(announce)
     }
 
     inner class AnnounceViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val img: ImageView = itemView.findViewById(R.id.image)
-        val tvGeneralInfo: TextView = itemView.findViewById(R.id.tvGeneralInfo)
-    }
+        private val binding = AnnonceListItemBinding.bind(itemView)
 
-    private fun bind(holder: AnnounceViewHolder, item: Announce) = with(holder) {
-        img.setImageUrl(item.image)
-        tvGeneralInfo.text = "${item.city} . ${item.price} . ${item.area} m "
+        fun bind(item: Announce) = with(item) {
+            binding.image.setImageUrl(image)
+            binding.tvGeneralInfo.text = getGeneralInfo()
 
-        itemView.setOnClickListener { itemClickListener?.invoke(item) }
+            itemView.setOnClickListener { itemClickListener?.invoke(item) }
+        }
     }
 }

@@ -7,7 +7,6 @@ import org.koin.android.ext.android.startKoin
 class SeLogerApplication : Application() {
 
     companion object {
-        private val LOG_TAG = SeLogerApplication::class.java.simpleName
         lateinit var instance: SeLogerApplication
     }
 

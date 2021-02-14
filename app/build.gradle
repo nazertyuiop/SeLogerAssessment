@@ -26,8 +26,8 @@ android {
         targetCompatibility JavaVersion.VERSION_1_8
     }
 
-    dataBinding {
-        enabled = true
+    buildFeatures {
+        viewBinding = true
     }
 }
 
@@ -64,7 +64,8 @@ dependencies {
 
     implementation rootProject.ext.moduleDependencies.okhttp
     implementation rootProject.ext.moduleDependencies.okhttpLog
-    testImplementation rootProject.ext.moduleDependencies.mockito
+    testImplementation rootProject.ext.moduleDependencies.mockitoKotlin
+    testImplementation rootProject.ext.moduleDependencies.mockk
 
     testImplementation 'org.jetbrains.kotlinx:kotlinx-coroutines-test:1.4.1'
     testImplementation 'android.arch.core:core-testing:1.1.1'

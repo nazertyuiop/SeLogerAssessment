@@ -8,12 +8,9 @@ class AnnounceRepositoryImpl(
     private val announcesApi: AnnouncesApi
 ) : AnnounceRepository {
 
-
     override suspend fun getListAnnounce(): List<Announce> {
-        val response =announcesApi.getListAnnounces()
-        System.out.println("ADA_REsponse $response")
+        val response = announcesApi.getListAnnounces()
         return response.toListModel()
     }
-
 }
 
